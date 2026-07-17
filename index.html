@@ -560,7 +560,6 @@ function submitForm() {
     document.querySelectorAll('.section-card').forEach(el => el.style.display = 'none');
     errEl.style.display = 'none';
     btn.style.display = 'none';
-    document.querySelector('.kakao-btn').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }).catch(() => {
