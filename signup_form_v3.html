@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>즐거움의힘 2026 여름방학 특강 신청</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #eaecf4; color: #1a1a2e; font-size: 15px; -webkit-text-size-adjust: 100%; }
+
+.hero { background: #0d1a3a; color: #fff; padding: 36px 20px 30px; text-align: center; }
+.hero-badge { display: inline-block; border: 1px solid #c8a84b; color: #c8a84b; font-size: 10px; letter-spacing: 2px; padding: 4px 14px; border-radius: 20px; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(20px, 5.5vw, 27px); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+.hero h1 span { color: #c8a84b; }
+.hero p { font-size: 13px; color: #8899bb; line-height: 1.7; }
+
+.process { display: flex; background: #13234e; padding: 13px 10px; }
+.process-step { flex: 1; text-align: center; font-size: 11px; color: #5a6e99; line-height: 1.5; position: relative; }
+.process-step:not(:last-child)::after { content: '›'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: #253662; font-size: 18px; }
+.process-step strong { display: block; color: #c8a84b; font-size: 10px; margin-bottom: 2px; letter-spacing: 0.5px; }
+
+.container { max-width: 540px; margin: 0 auto; padding: 0 14px 60px; }
+
+.section-card { background: #fff; border-radius: 14px; margin-top: 16px; overflow: hidden; border: 1px solid #d8dcea; }
+.section-header { display: flex; align-items: center; gap: 12px; padding: 15px 18px 12px; border-bottom: 1px solid #eef0f7; background: #f6f8fd; }
+.section-num { background: #0d1a3a; color: #c8a84b; width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.section-header-text h3 { font-size: 15px; font-weight: 700; color: #0d1a3a; }
+.section-header-text p { font-size: 12px; color: #7788aa; margin-top: 2px; }
+.section-body { padding: 18px; }
+
+.field { margin-bottom: 15px; }
+.field:last-child { margin-bottom: 0; }
+.field-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 7px; color: #1a2744; }
+.field-label .req { color: #d63031; margin-left: 3px; }
+
+input[type="text"], input[type="tel"], select, textarea {
+  width: 100%; padding: 12px 14px; border: 1.5px solid #d8dcea; border-radius: 9px;
+  font-size: 14px; font-family: inherit; color: #1a2744; background: #fafbfd;
+  outline: none; transition: border-color 0.15s; -webkit-appearance: none; appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: #c8a84b; background: #fff; }
+input::placeholder, textarea::placeholder { color: #b0bcd4; }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667799' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+}
+
+.radio-row { display: flex; gap: 8px; }
+.r-opt { display: none; }
+.r-lbl { flex: 1; padding: 11px 10px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 14px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
+.r-opt:checked + .r-lbl { border-color: #0d1a3a; background: #e4eaf8; color: #0d1a3a; font-weight: 700; }
+
+/* 특강 카드 */
+.course-grid { display: flex; flex-direction: column; gap: 10px; }
+.c-opt { display: none; }
+.c-lbl { display: flex; align-items: flex-start; gap: 12px; padding: 14px 15px; border: 1.5px solid #d8dcea; border-radius: 11px; cursor: pointer; background: #fafbfd; transition: all 0.15s; }
+.c-opt:checked + .c-lbl { border-color: #c8a84b; background: #fdf9ee; }
+.c-check { width: 20px; height: 20px; border: 2px solid #c0cce0; border-radius: 5px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; }
+.c-opt:checked + .c-lbl .c-check { background: #c8a84b; border-color: #c8a84b; }
+.c-opt:checked + .c-lbl .c-check::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 700; }
+.c-info { flex: 1; min-width: 0; }
+.c-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 5px; }
+.c-name { font-size: 14px; font-weight: 700; color: #0d1a3a; }
+.c-meta { font-size: 11.5px; color: #7788aa; line-height: 1.75; }
+.badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; white-space: nowrap; }
+.b-mid { background: #dde6fb; color: #1a3a9c; }
+.b-sci { background: #d8f2e4; color: #166534; }
+.b-hp  { background: #ede0ff; color: #5e22ce; }
+
+/* 포스터 보기 버튼 */
+.poster-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 8px; padding: 5px 10px;
+  border: 1px solid #c0cce0; border-radius: 6px;
+  background: #fff; color: #445577; font-size: 11.5px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; font-family: inherit;
+  white-space: nowrap;
+}
+.poster-btn:hover { border-color: #0d1a3a; color: #0d1a3a; background: #f0f4fb; }
+
+/* 포스터 모달 */
+.poster-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10, 18, 40, 0.85);
+  z-index: 9999; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.poster-overlay.active { display: flex; }
+.poster-modal { position: relative; max-width: 480px; width: 100%; }
+.poster-modal img { width: 100%; border-radius: 12px; display: block; }
+.poster-close {
+  position: absolute; top: -14px; right: -14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #fff; color: #0d1a3a; border: none;
+  font-size: 18px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.poster-placeholder {
+  background: #1a2e5a; border-radius: 12px;
+  padding: 60px 30px; text-align: center; color: #8899cc;
+  font-size: 14px; line-height: 1.7;
+}
+.poster-placeholder strong { display: block; font-size: 16px; color: #c8a84b; margin-bottom: 8px; }
+
+/* 시간 */
+.notice { background: #ebf0fb; border-left: 3px solid #1a3a7c; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12.5px; color: #334466; line-height: 1.7; margin-bottom: 14px; }
+.time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (max-width: 360px) { .time-grid { grid-template-columns: repeat(2, 1fr); } }
+.t-opt { display: none; }
+.t-lbl { display: block; padding: 10px 6px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 13px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
+.t-opt:checked + .t-lbl { border-color: #0d1a3a; background: #e4eaf8; color: #0d1a3a; font-weight: 700; }
+
+/* 동의 */
+.agree-box { background: #f4f6fb; border: 1px solid #d8dcea; border-radius: 10px; padding: 14px; font-size: 12px; color: #556677; line-height: 1.9; margin-bottom: 14px; }
+.agree-row { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; font-weight: 600; color: #1a2744; }
+.agree-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: #0d1a3a; cursor: pointer; flex-shrink: 0; }
+
+/* 버튼 */
+.submit-btn { width: 100%; padding: 16px; background: #0d1a3a; color: #fff; border: none; border-radius: 11px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; font-family: inherit; transition: background 0.15s; }
+.submit-btn:hover { background: #c8a84b; color: #0d1a3a; }
+.submit-btn:disabled { background: #99aabb; cursor: not-allowed; }
+
+.kakao-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background: #FEE500; color: #1a1a1a; border: none; border-radius: 11px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px; font-family: inherit; text-decoration: none; transition: background 0.15s; }
+.kakao-btn:hover { background: #f0d800; }
+
+.error-msg { display: none; color: #c0392b; font-size: 13px; margin-top: 12px; text-align: center; padding: 10px 14px; background: #fef0f0; border-radius: 9px; border: 1px solid #fad4d4; }
+
+.success-msg { display: none; text-align: center; padding: 50px 20px; background: #fff; border-radius: 14px; margin-top: 16px; border: 1px solid #d8dcea; }
+.success-msg .icon { font-size: 46px; margin-bottom: 14px; }
+.success-msg h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; color: #0d1a3a; }
+.success-msg p { font-size: 14px; color: #667799; line-height: 1.8; }
+
+/* 연락처 */
+.contact-bar { background: #0d1a3a; color: #fff; padding: 24px 20px; text-align: center; margin-top: 16px; border-radius: 14px; }
+.contact-bar .phone { font-size: 20px; color: #c8a84b; font-weight: 700; margin-bottom: 14px; }
+.addr-list { list-style: none; display: flex; flex-direction: column; gap: 8px; text-align: left; max-width: 320px; margin: 0 auto; }
+.addr-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #99aabb; line-height: 1.5; }
+.addr-tag { background: #c8a84b; color: #0d1a3a; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- 포스터 모달 -->
+<div class="poster-overlay" id="posterOverlay" onclick="closePoster(event)">
+  <div class="poster-modal">
+    <button class="poster-close" onclick="closePosterBtn()">✕</button>
+    <div id="posterContent"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">DELIGHTFUL EXPERIENCES EDUCATION</div>
+  <h1>2026 즐거움의힘<br><span>여름방학 특강</span> 신청</h1>
+  <p>여름방학은 기간이 짧은 만큼 선택과 집중이 중요합니다.<br>지금 신청하고 다음 학기를 준비하세요.</p>
+</div>
+
+<div class="process">
+  <div class="process-step"><strong>01</strong>기본정보 입력</div>
+  <div class="process-step"><strong>02</strong>특강 선택</div>
+  <div class="process-step"><strong>03</strong>상담 연결</div>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-header-text">
+        <h3>학생 기본 정보</h3>
+        <p>상담 연락을 위한 필수 정보입니다</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label class="field-label">학생 이름 <span class="req">*</span></label>
+        <input type="text" id="studentName" placeholder="홍길동">
+      </div>
+      <div class="field">
+        <label class="field-label">학부모님 전화번호 <span class="req">*</span></label>
+        <input type="tel" id="parentPhone" placeholder="010-0000-0000">
+      </div>
+      <div class="field">
+        <label class="field-label">학교 <span class="req">*</span></label>
+        <input type="text" id="school" placeholder="○○초등학교">
+      </div>
+      <div class="field">
+        <label class="field-label">학년 <span class="req">*</span></label>
+        <select id="grade">
+          <option value="">선택해주세요</option>
+          <option>초등 1학년</option>
+          <option>초등 2학년</option>
+          <option>초등 3학년</option>
+          <option>초등 4학년</option>
+          <option>초등 5학년</option>
+          <option>초등 6학년</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">재원 여부 <span class="req">*</span></label>
+        <div class="radio-row">
+          <input type="radio" class="r-opt" id="m1" name="member" value="재원생">
+          <label class="r-lbl" for="m1">재원생</label>
+          <input type="radio" class="r-opt" id="m2" name="member" value="비재원생">
+          <label class="r-lbl" for="m2">비재원생</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-header-text">
+        <h3>수강 희망 특강</h3>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="course-grid">
+
+        <div class="course-item">
+          <input type="checkbox" class="c-opt" id="c1" value="중학필수문법">
+          <label class="c-lbl" for="c1">
+            <div class="c-check"></div>
+            <div class="c-info">
+              <div class="c-top">
+                <span class="c-name">중학필수문법</span>
+                <span class="badge b-mid">4~6학년</span>
+              </div>
+              <div class="c-meta">
+                교수부장님 직강 · Lv.5 이상 · 정원 12명<br>
+                8/3~8/14 | 월수금 12:00~13:00 / 화목 12:00~13:30<br>
+                재원생 130,000원 · 비재원생 154,000원
+              </div>
+              <button class="poster-btn" onclick="openPoster(event, 'c1')">🖼 포스터 보기</button>
+            </div>
+          </label>
+        </div>
+
+        <div class="course-item">
+          <input type="checkbox" class="c-opt" id="c2" value="과학수업">
+          <label class="c-lbl" for="c2">
+            <div class="c-check"></div>
+            <div class="c-info">
+              <div class="c-top">
+                <span class="c-name">영어로 배우는 과학수업</span>
+                <span class="badge b-sci">3~4학년</span>
+              </div>
+              <div class="c-meta">
+                Lv.2~7 · 정원 10명<br>
+                8/3~8/13 | 월수·화목 12:00~13:00<br>
+                재원생 94,000원 · 비재원생 110,000원
+              </div>
+              <button class="poster-btn" onclick="openPoster(event, 'c2')">🖼 포스터 보기</button>
+            </div>
+          </label>
+        </div>
+
+        <div class="course-item">
+          <input type="checkbox" class="c-opt" id="c3" value="해리포터원서특강">
+          <label class="c-lbl" for="c3">
+            <div class="c-check"></div>
+            <div class="c-info">
+              <div class="c-top">
+                <span class="c-name">해리포터 원서 특강</span>
+                <span class="badge b-hp">3~6학년</span>
+              </div>
+              <div class="c-meta">
+                Lv.7 이상 (SR지수 4.5↑) · 정원 10명<br>
+                8/3~8/14 | 월수금 12:30~14:00<br>
+                재원생 190,000원 · 비재원생 226,000원
+              </div>
+              <button class="poster-btn" onclick="openPoster(event, 'c3')">🖼 포스터 보기</button>
+            </div>
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-header-text">
+        <h3>상담 희망 시간</h3>
+        <p>평일 중 연락 가능한 시간대를 선택해주세요</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="notice">
+        📞 상담은 <strong>평일(월~금)</strong> 중 진행됩니다.<br>선택하신 시간대에 학원에서 먼저 연락드립니다.
+      </div>
+      <div class="time-grid">
+        <input type="radio" class="t-opt" id="t1" name="time" value="오후 12~1시"><label class="t-lbl" for="t1">오후 12~1시</label>
+        <input type="radio" class="t-opt" id="t2" name="time" value="오후 1~2시"><label class="t-lbl" for="t2">오후 1~2시</label>
+        <input type="radio" class="t-opt" id="t3" name="time" value="오후 2~3시"><label class="t-lbl" for="t3">오후 2~3시</label>
+        <input type="radio" class="t-opt" id="t4" name="time" value="오후 3~4시"><label class="t-lbl" for="t4">오후 3~4시</label>
+        <input type="radio" class="t-opt" id="t5" name="time" value="오후 4~5시"><label class="t-lbl" for="t5">오후 4~5시</label>
+        <input type="radio" class="t-opt" id="t6" name="time" value="오후 5~6시"><label class="t-lbl" for="t6">오후 5~6시</label>
+        <input type="radio" class="t-opt" id="t7" name="time" value="오후 6~7시"><label class="t-lbl" for="t7">오후 6~7시</label>
+        <input type="radio" class="t-opt" id="t8" name="time" value="오후 7~8시"><label class="t-lbl" for="t8">오후 7~8시</label>
+        <input type="radio" class="t-opt" id="t9" name="time" value="시간 무관"><label class="t-lbl" for="t9">시간 무관</label>
+      </div>
+      <div class="field" style="margin-top:16px">
+        <label class="field-label">전달 사항</label>
+        <textarea id="memo" rows="3" placeholder="궁금하신 점이나 전달하실 내용을 자유롭게 적어주세요."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-header-text">
+        <h3>개인정보 수집 및 이용 동의</h3>
+        <p>예약 확인과 상담 안내를 위한 필수 동의입니다</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="agree-box">
+        1. 수집 항목: 학생 이름, 학교, 학년, 재원 여부, 학부모 연락처, 상담 요청 내용<br>
+        2. 이용 목적: 특강 신청 확인, 상담 준비, 프로그램 안내<br>
+        3. 보유 기간: 상담 종료 후 1년 또는 수신 거부 요청 시까지
+      </div>
+      <label class="agree-row">
+        <input type="checkbox" id="agreeCheck">
+        개인정보 수집 및 이용에 동의합니다.
+      </label>
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <button class="submit-btn" onclick="submitForm()">특강 신청하기</button>
+  <a class="kakao-btn" href="https://pf.kakao.com/_xlqxljxb" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.7 1.6 5.1 4 6.6l-.9 3.3 3.8-2.5c.9.2 1.9.3 2.9.3 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
+    카카오톡으로 문의하기
+  </a>
+
+  <div class="success-msg" id="successMsg">
+    <div class="icon">✅</div>
+    <h3>신청이 완료되었습니다!</h3>
+    <p>확인 후 학부모님 연락처로<br>빠르게 연락드리겠습니다.<br><br><strong>즐거움의힘 영어학원</strong></p>
+  </div>
+
+  <div class="contact-bar">
+    <div class="phone">📞 02-898-7905</div>
+    <ul class="addr-list">
+      <li><span class="addr-tag">1관</span><span>경기 광명시 하안동 770 경흥빌딩 3층</span></li>
+      <li><span class="addr-tag">2관</span><span>경기 광명시 하안동 863 두산상가 2층</span></li>
+      <li><span class="addr-tag">3관</span><span>경기 광명시 하안동 864 이편한 '가' 상가 3층</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+/* ── 포스터 이미지 URL 여기에 입력 ── */
+const POSTERS = {
+  c1: 'https://lh3.googleusercontent.com/d/1yNbKLoqreOkeNc8q4o-9SajZkj5-ZF5S',
+  c2: 'https://lh3.googleusercontent.com/d/1cMiQ_VgwubfZXMYqFrWRpwllP1CV2LuS',
+  c3: 'https://lh3.googleusercontent.com/d/15u5X_h2GF-lblqe6v6XBQD-LjnTJpNBG',
+};
+
+const POSTER_NAMES = {
+  c1: '중학필수문법',
+  c2: '영어로 배우는 과학수업',
+  c3: '해리포터 원서 특강',
+};
+
+function openPoster(e, id) {
+  e.preventDefault();
+  e.stopPropagation();
+  const url = POSTERS[id];
+  const content = document.getElementById('posterContent');
+  if (url) {
+    content.innerHTML = `<img src="${url}" alt="${POSTER_NAMES[id]} 포스터">`;
+  } else {
+    content.innerHTML = `<div class="poster-placeholder"><strong>${POSTER_NAMES[id]}</strong>포스터 이미지를 준비 중입니다.<br>POSTERS 객체에 이미지 URL을 입력해주세요.</div>`;
+  }
+  document.getElementById('posterOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePoster(e) {
+  if (e.target === document.getElementById('posterOverlay')) closePosterBtn();
+}
+
+function closePosterBtn() {
+  document.getElementById('posterOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePosterBtn(); });
+
+/* ── 폼 제출 ── */
+function submitForm() {
+  const name    = document.getElementById('studentName').value.trim();
+  const phone   = document.getElementById('parentPhone').value.trim();
+  const school  = document.getElementById('school').value.trim();
+  const grade   = document.getElementById('grade').value;
+  const memberEl = document.querySelector('input[name="member"]:checked');
+  const member  = memberEl ? memberEl.value : '';
+  const courses = [...document.querySelectorAll('.c-opt:checked')].map(e => e.value);
+  const timeEl  = document.querySelector('.t-opt:checked');
+  const time    = timeEl ? timeEl.value : '';
+  const memo    = document.getElementById('memo').value.trim();
+  const agreed  = document.getElementById('agreeCheck').checked;
+
+  const errEl = document.getElementById('errorMsg');
+  const show = msg => { errEl.textContent = msg; errEl.style.display = 'block'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  errEl.style.display = 'none';
+
+  if (!name || !phone || !school || !grade) return show('학생 기본 정보를 모두 입력해주세요.');
+  if (!member)          return show('재원 여부를 선택해주세요.');
+  if (courses.length === 0) return show('수강 희망 특강을 1개 이상 선택해주세요.');
+  if (courses.length > 2)   return show('특강은 최대 2개까지 선택 가능합니다.');
+  if (!time)            return show('상담 희망 시간을 선택해주세요.');
+  if (!agreed)          return show('개인정보 수집 및 이용에 동의해주세요.');
+
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = '제출 중...';
+  btn.disabled = true;
+
+  fetch(SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, phone, school, grade, member, courses: courses.join(', '), time, memo })
+  }).then(() => {
+    document.querySelectorAll('.section-card').forEach(el => el.style.display = 'none');
+    errEl.style.display = 'none';
+    btn.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }).catch(() => {
+    show('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+    btn.textContent = '특강 신청하기';
+    btn.disabled = false;
+  });
+}
+
+document.querySelectorAll('.c-opt').forEach(cb => {
+  cb.addEventListener('change', () => {
+    if ([...document.querySelectorAll('.c-opt:checked')].length > 2) cb.checked = false;
+  });
+});
+</script>
+</body>
+</html>
