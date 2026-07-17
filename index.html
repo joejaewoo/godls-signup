@@ -262,6 +262,10 @@ select {
           <input type="text" id="studentName" placeholder="홍길동">
         </div>
         <div class="field">
+          <label class="field-label">영어 이름 <span class="req">*</span></label>
+          <input type="text" id="studentEngName" placeholder="Gildong Hong">
+        </div>
+        <div class="field">
           <label class="field-label">학부모님 전화번호 <span class="req">*</span></label>
           <input type="tel" id="parentPhone" placeholder="010-0000-0000">
         </div>
@@ -403,10 +407,7 @@ select {
 
     <div class="error-msg" id="errorMsg"></div>
     <button class="submit-btn" onclick="submitForm()">특강 신청하기</button>
-    <a class="kakao-btn" href="https://pf.kakao.com/_xlqxljxb" target="_blank">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.7 1.6 5.1 4 6.6l-.9 3.3 3.8-2.5c.9.2 1.9.3 2.9.3 5.52 0 10-3.48 10-7.8S17.52 3 12 3z"/></svg>
-      카카오톡으로 문의하기
-    </a>
+
 
     <div class="success-msg" id="successMsg">
       <div class="icon">✅</div>
@@ -510,6 +511,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePosterB
 /* ── 폼 제출 ── */
 function submitForm() {
   const name    = document.getElementById('studentName').value.trim();
+  const engName = document.getElementById('studentEngName').value.trim();
   const phone   = document.getElementById('parentPhone').value.trim();
   const school  = document.getElementById('school').value.trim();
   const grade   = document.getElementById('grade').value;
@@ -525,7 +527,7 @@ function submitForm() {
   const show = msg => { errEl.textContent = msg; errEl.style.display = 'block'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
   errEl.style.display = 'none';
 
-  if (!name || !phone || !school || !grade) return show('학생 기본 정보를 모두 입력해주세요.');
+  if (!name || !phone || !school || !grade || !engName) return show('학생 기본 정보를 모두 입력해주세요.');
   if (!member) return show('재원 여부를 선택해주세요.');
   if (checkedCourses.length === 0) return show('수강 희망 특강을 1개 이상 선택해주세요.');
 
@@ -553,7 +555,7 @@ function submitForm() {
   fetch(SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, phone, school, grade, member, courses: coursesWithDay, time, memo })
+    body: JSON.stringify({ name, engName, phone, school, grade, member, courses: coursesWithDay, time, memo })
   }).then(() => {
     document.querySelectorAll('.section-card').forEach(el => el.style.display = 'none');
     errEl.style.display = 'none';
