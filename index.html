@@ -42,6 +42,20 @@ body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; backgroun
 }
 .admin-btn:hover { border-color: #0d1a3a; color: #0d1a3a; }
 
+.lookup-cta {
+  display: block; width: 100%; margin-top: 20px; padding: 16px;
+  background: #fff; border: 1.5px solid #c8a84b; border-radius: 12px;
+  font-size: 15px; font-weight: 700; color: #0d1a3a; cursor: pointer;
+  font-family: inherit; transition: all 0.15s;
+  box-shadow: 0 2px 10px rgba(200,168,75,0.15);
+}
+.lookup-cta:hover { background: #fdf9ee; border-color: #b8983b; }
+.admin-link {
+  font-size: 12px; color: #a8b2c8; cursor: pointer; padding: 6px 12px;
+  transition: color 0.15s;
+}
+.admin-link:hover { color: #667799; }
+
 /* ── 관리자 로그인 ── */
 .admin-wrap { max-width: 360px; margin: 60px auto; padding: 0 16px; }
 .admin-card { background: #fff; border-radius: 16px; border: 1px solid #d8dcea; padding: 32px 24px; text-align: center; }
@@ -150,6 +164,16 @@ select {
 .tg-opt { display: none; }
 .tg-lbl { display: block; padding: 10px 6px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 13px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
 .tg-opt:checked + .tg-lbl { border-color: #c8a84b; background: #fdf9ee; color: #0d1a3a; font-weight: 700; }
+
+.result-card { background: #fff; border-radius: 14px; border: 1px solid #d8dcea; padding: 18px; margin-top: 14px; }
+.result-card .rc-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+.rc-tag.t-lec { background: #dde6fb; color: #1a3a9c; }
+.rc-tag.t-sem { background: #ede0ff; color: #5e22ce; }
+.result-card .rc-row { display: flex; font-size: 13px; padding: 5px 0; border-bottom: 1px solid #f2f4fa; line-height: 1.5; }
+.result-card .rc-row:last-child { border-bottom: none; }
+.result-card .rc-key { width: 90px; color: #8899bb; flex-shrink: 0; }
+.result-card .rc-val { color: #1a2744; font-weight: 500; }
+.lookup-empty { text-align: center; padding: 40px 20px; color: #8899bb; font-size: 14px; line-height: 1.7; margin-top: 14px; }
 .t-opt { display: none; }
 .t-lbl { display: block; padding: 10px 6px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 13px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
 .t-opt:checked + .t-lbl { border-color: #0d1a3a; background: #e4eaf8; color: #0d1a3a; font-weight: 700; }
@@ -213,7 +237,12 @@ select {
       </div>
     </div>
 
-    <button class="admin-btn" onclick="showView('view-admin')">🔒 관리자</button>
+    <button class="lookup-cta" onclick="showView('view-lookup')">
+      🔎 내 신청내역 조회하기
+    </button>
+    <div style="text-align:center;margin-top:18px">
+      <span class="admin-link" onclick="showView('view-admin')">🔒 관리자</span>
+    </div>
   </div>
 </div>
 
@@ -230,6 +259,33 @@ select {
       <div class="admin-error" id="adminError">비밀번호가 올바르지 않습니다.</div>
       <div><span class="back-link" onclick="showView('view-landing')">← 돌아가기</span></div>
     </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     신청내역 조회
+════════════════════════════════ -->
+<div class="view" id="view-lookup">
+  <div class="form-hero">
+    <div class="form-hero-top">
+      <button class="back-btn" onclick="showView('view-landing')">←</button>
+      <div><h1>내 <span>신청내역 조회</span></h1></div>
+    </div>
+    <p>신청 시 입력한 전화번호로 조회하세요.</p>
+  </div>
+
+  <div class="container">
+    <div class="section-card" style="margin-top:20px">
+      <div class="section-body">
+        <div class="field">
+          <label class="field-label">학부모님 전화번호</label>
+          <input type="tel" id="lookupPhone" placeholder="010-0000-0000" onkeydown="if(event.key==='Enter')doLookup()">
+        </div>
+        <button class="submit-btn" style="margin-top:8px" onclick="doLookup()">조회하기</button>
+      </div>
+    </div>
+
+    <div id="lookupResult"></div>
   </div>
 </div>
 
@@ -475,12 +531,10 @@ select {
           <label class="field-label">학년 <span class="req">*</span></label>
           <select id="s_grade">
             <option value="">선택해주세요</option>
-            <option>초등 1학년</option>
-            <option>초등 2학년</option>
-            <option>초등 3학년</option>
             <option>초등 4학년</option>
             <option>초등 5학년</option>
             <option>초등 6학년</option>
+            <option>중등 이상</option>
           </select>
         </div>
         <div class="field">
@@ -495,12 +549,12 @@ select {
         <div class="field">
           <label class="field-label">희망 고교 <span class="req">*</span> <span style="font-weight:400;color:#8899bb;font-size:12px">(복수 선택 가능)</span></label>
           <div class="target-grid">
-            <input type="checkbox" class="tg-opt" id="tg1" value="미정"><label class="tg-lbl" for="tg1">미정</label>
-            <input type="checkbox" class="tg-opt" id="tg2" value="과학고"><label class="tg-lbl" for="tg2">과학고</label>
-            <input type="checkbox" class="tg-opt" id="tg3" value="영재고"><label class="tg-lbl" for="tg3">영재고</label>
-            <input type="checkbox" class="tg-opt" id="tg4" value="전국자사고"><label class="tg-lbl" for="tg4">전국자사고</label>
-            <input type="checkbox" class="tg-opt" id="tg5" value="광역자사고"><label class="tg-lbl" for="tg5">광역자사고</label>
-            <input type="checkbox" class="tg-opt" id="tg6" value="외고/국제고"><label class="tg-lbl" for="tg6">외고/국제고</label>
+            <input type="checkbox" class="tg-opt" id="tg1" value="영/과고"><label class="tg-lbl" for="tg1">영/과고</label>
+            <input type="checkbox" class="tg-opt" id="tg2" value="전국자사고"><label class="tg-lbl" for="tg2">전국자사고</label>
+            <input type="checkbox" class="tg-opt" id="tg3" value="광역자사고"><label class="tg-lbl" for="tg3">광역자사고</label>
+            <input type="checkbox" class="tg-opt" id="tg4" value="외고/국제고"><label class="tg-lbl" for="tg4">외고/국제고</label>
+            <input type="checkbox" class="tg-opt" id="tg5" value="일반고-광명"><label class="tg-lbl" for="tg5">일반고-광명</label>
+            <input type="checkbox" class="tg-opt" id="tg6" value="일반고-비평준화"><label class="tg-lbl" for="tg6">일반고-비평준화</label>
           </div>
         </div>
       </div>
@@ -512,7 +566,7 @@ select {
         <div class="section-header-text"><h3>참석 회차 선택</h3><p>참석 가능한 회차를 선택해주세요</p></div>
       </div>
       <div class="section-body">
-        <div class="notice">📍 장소: <strong>실력의힘 건물 5층</strong><br>연사: Yuji 원장(실력의힘) · Joe 부원장(즐거움의힘)</div>
+        <div class="notice">📍 장소: <strong>실력의힘 건물 5층</strong><br>연사: Eunice 원장(실력의힘) · Joe 부원장(즐거움의힘)</div>
         <div class="radio-row" style="flex-direction:column;gap:10px">
           <div style="display:flex;gap:8px;width:100%">
             <input type="radio" class="r-opt" id="ss1" name="s_session" value="1차 8/13(목) 오전 11시">
@@ -579,11 +633,72 @@ const POSTERS = {
 };
 const POSTER_NAMES = { c1: '중학필수문법', c2: '영어로 배우는 과학수업', c3: '해리포터 원서 특강' };
 
+/* ── 신청내역 조회 ── */
+function doLookup() {
+  const raw = document.getElementById('lookupPhone').value.trim();
+  const phone = raw.replace(/[^0-9]/g, '');
+  const resultEl = document.getElementById('lookupResult');
+
+  if (!phone) {
+    resultEl.innerHTML = '<div class="lookup-empty">전화번호를 입력해주세요.</div>';
+    return;
+  }
+
+  resultEl.innerHTML = '<div class="lookup-empty">조회 중...</div>';
+
+  const cbName = 'lookupCb_' + Date.now();
+  window[cbName] = function(data) {
+    delete window[cbName];
+    document.body.removeChild(script);
+    renderLookup(data);
+  };
+
+  const script = document.createElement('script');
+  script.src = SCRIPT_URL + '?phone=' + encodeURIComponent(phone) + '&callback=' + cbName;
+  script.onerror = () => {
+    resultEl.innerHTML = '<div class="lookup-empty">조회 중 오류가 발생했습니다.<br>잠시 후 다시 시도해주세요.</div>';
+  };
+  document.body.appendChild(script);
+}
+
+function renderLookup(data) {
+  const resultEl = document.getElementById('lookupResult');
+  if (!data || data.result !== 'success') {
+    resultEl.innerHTML = '<div class="lookup-empty">조회 중 오류가 발생했습니다.</div>';
+    return;
+  }
+  if (!data.records || data.records.length === 0) {
+    resultEl.innerHTML = '<div class="lookup-empty">해당 번호로 신청된 내역이 없습니다.</div>';
+    return;
+  }
+
+  let html = '';
+  data.records.forEach(rec => {
+    const sheetName = rec._sheet || '';
+    const isSem = sheetName.indexOf('설명회') >= 0;
+    const tagClass = isSem ? 't-sem' : 't-lec';
+    html += '<div class="result-card">';
+    html += '<span class="rc-tag ' + tagClass + '">' + sheetName + '</span>';
+    Object.keys(rec).forEach(k => {
+      if (k === '_sheet') return;
+      const val = rec[k];
+      if (val === '' || val === null || val === undefined) return;
+      html += '<div class="rc-row"><div class="rc-key">' + k + '</div><div class="rc-val">' + val + '</div></div>';
+    });
+    html += '</div>';
+  });
+  resultEl.innerHTML = html;
+}
+
 /* ── 뷰 전환 ── */
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'view-lookup') {
+    document.getElementById('lookupResult').innerHTML = '';
+    document.getElementById('lookupPhone').value = '';
+  }
 }
 
 /* ── 관리자 로그인 ── */
