@@ -209,6 +209,17 @@ select {
       </div>
     </div>
 
+    <div class="program-card" onclick="showView('view-seminar')">
+      <div class="program-card-left">
+        <h3>특목/자사고 초등 입시전략 설명회</h3>
+        <p>1차 8/13(목) · 2차 8/20(목)</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="program-card-badge">신청중</span>
+        <span class="program-arrow">›</span>
+      </div>
+    </div>
+
     <button class="admin-btn" onclick="showView('view-admin')">🔒 관리자</button>
   </div>
 </div>
@@ -427,8 +438,145 @@ select {
   </div>
 </div>
 
+<!-- ════════════════════════════════
+     설명회 신청 폼
+════════════════════════════════ -->
+<div class="view" id="view-seminar">
+  <div class="form-hero">
+    <div class="form-hero-top">
+      <button class="back-btn" onclick="showView('view-landing')">←</button>
+      <div>
+        <h1>특목/자사고 <span>초등 입시전략 설명회</span></h1>
+      </div>
+    </div>
+    <p>특목고 입시, 중3이 아니라 지금 결정됩니다.</p>
+  </div>
+
+  <div class="process">
+    <div class="process-step"><strong>01</strong>기본정보 입력</div>
+    <div class="process-step"><strong>02</strong>회차 선택</div>
+    <div class="process-step"><strong>03</strong>신청 완료</div>
+  </div>
+
+  <div class="container">
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-header-text"><h3>학생 기본 정보</h3><p>신청 확인을 위한 필수 정보입니다</p></div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="field-label">학생 이름 <span class="req">*</span></label>
+          <input type="text" id="s_name" placeholder="홍길동">
+        </div>
+        <div class="field">
+          <label class="field-label">학부모님 전화번호 <span class="req">*</span></label>
+          <input type="tel" id="s_phone" placeholder="010-0000-0000">
+        </div>
+        <div class="field">
+          <label class="field-label">학교 <span class="req">*</span></label>
+          <input type="text" id="s_school" placeholder="○○초등학교">
+        </div>
+        <div class="field">
+          <label class="field-label">학년 <span class="req">*</span></label>
+          <select id="s_grade">
+            <option value="">선택해주세요</option>
+            <option>초등 1학년</option>
+            <option>초등 2학년</option>
+            <option>초등 3학년</option>
+            <option>초등 4학년</option>
+            <option>초등 5학년</option>
+            <option>초등 6학년</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">재원 여부 <span class="req">*</span></label>
+          <div class="radio-row">
+            <input type="radio" class="r-opt" id="sm1" name="s_member" value="재원생">
+            <label class="r-lbl" for="sm1">재원생</label>
+            <input type="radio" class="r-opt" id="sm2" name="s_member" value="비재원생">
+            <label class="r-lbl" for="sm2">비재원생</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">희망 고교 <span class="req">*</span></label>
+          <select id="s_target">
+            <option value="">선택해주세요</option>
+            <option>미정</option>
+            <option>과학고</option>
+            <option>영재고</option>
+            <option>전국자사고</option>
+            <option>광역자사고</option>
+            <option>외고/국제고</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-header-text"><h3>참석 회차 선택</h3><p>참석 가능한 회차를 선택해주세요</p></div>
+      </div>
+      <div class="section-body">
+        <div class="notice">📍 장소: <strong>실력의힘 건물 5층</strong><br>연사: Yuji 원장(실력의힘) · Joe 부원장(즐거움의힘)</div>
+        <div class="radio-row" style="flex-direction:column;gap:10px">
+          <div style="display:flex;gap:8px;width:100%">
+            <input type="radio" class="r-opt" id="ss1" name="s_session" value="1차 8/13(목) 오전 11시">
+            <label class="r-lbl" for="ss1" style="flex:1">1차 · 8/13(목) 오전 11시</label>
+          </div>
+          <div style="display:flex;gap:8px;width:100%">
+            <input type="radio" class="r-opt" id="ss2" name="s_session" value="2차 8/20(목) 오후 8시">
+            <label class="r-lbl" for="ss2" style="flex:1">2차 · 8/20(목) 오후 8시</label>
+          </div>
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label class="field-label">전달 사항</label>
+          <textarea id="s_memo" rows="3" placeholder="궁금하신 점이나 전달하실 내용을 자유롭게 적어주세요."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-header-text"><h3>개인정보 수집 및 이용 동의</h3><p>신청 확인과 안내를 위한 필수 동의입니다</p></div>
+      </div>
+      <div class="section-body">
+        <div class="agree-box">
+          1. 수집 항목: 학생 이름, 학교, 학년, 재원 여부, 희망 고교, 학부모 연락처<br>
+          2. 이용 목적: 설명회 신청 확인 및 안내<br>
+          3. 보유 기간: 설명회 종료 후 1년 또는 수신 거부 요청 시까지
+        </div>
+        <label class="agree-row">
+          <input type="checkbox" id="s_agree">
+          개인정보 수집 및 이용에 동의합니다.
+        </label>
+      </div>
+    </div>
+
+    <div class="error-msg" id="s_errorMsg"></div>
+    <button class="submit-btn" onclick="submitSeminar()">설명회 신청하기</button>
+
+    <div class="success-msg" id="s_successMsg">
+      <div class="icon">✅</div>
+      <h3>신청이 완료되었습니다!</h3>
+      <p>확인 후 학부모님 연락처로<br>안내드리겠습니다.<br><br><strong>즐거움의힘 · 실력의힘</strong></p>
+    </div>
+
+    <div class="contact-bar">
+      <div class="phone">📞 02-898-7905</div>
+      <ul class="addr-list">
+        <li><span class="addr-tag">장소</span><span>실력의힘 건물 5층</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFv_krK35oL2DQGv4Rbdn-j2chyFDXwfd05hRqqMIq9kCUJvEQiVeUwGLwuFTE5c7n/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzakzRDGZxr6p-JmKgsDh1ZFWGTYGYnrs5V_7KmHtmTQPiVC5nLTIUlzBOwNDw52g/exec';
 const ADMIN_PW = '7905';
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/147jp4QXrCE73jwV8yyXyQD669M_SZ_2APbq_kR_FtJs';
 
@@ -549,15 +697,15 @@ function submitForm() {
     return dayEl ? `${cb.value}(${dayEl.value})` : cb.value;
   }).join(', ');
 
-  const btn = document.querySelector('.submit-btn');
+  const btn = document.querySelector('#view-form .submit-btn');
   btn.textContent = '제출 중...'; btn.disabled = true;
 
   fetch(SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, engName, phone, school, grade, member, courses: coursesWithDay, time, memo })
+    body: JSON.stringify({ type: '특강', name, engName, phone, school, grade, member, courses: coursesWithDay, time, memo })
   }).then(() => {
-    document.querySelectorAll('.section-card').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('#view-form .section-card').forEach(el => el.style.display = 'none');
     errEl.style.display = 'none';
     btn.style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
@@ -565,6 +713,49 @@ function submitForm() {
   }).catch(() => {
     show('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
     btn.textContent = '특강 신청하기'; btn.disabled = false;
+  });
+}
+
+/* ── 설명회 제출 ── */
+function submitSeminar() {
+  const name   = document.getElementById('s_name').value.trim();
+  const phone  = document.getElementById('s_phone').value.trim();
+  const school = document.getElementById('s_school').value.trim();
+  const grade  = document.getElementById('s_grade').value;
+  const memberEl = document.querySelector('input[name="s_member"]:checked');
+  const member = memberEl ? memberEl.value : '';
+  const target = document.getElementById('s_target').value;
+  const sessionEl = document.querySelector('input[name="s_session"]:checked');
+  const session = sessionEl ? sessionEl.value : '';
+  const memo   = document.getElementById('s_memo').value.trim();
+  const agreed = document.getElementById('s_agree').checked;
+
+  const errEl = document.getElementById('s_errorMsg');
+  const show = msg => { errEl.textContent = msg; errEl.style.display = 'block'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  errEl.style.display = 'none';
+
+  if (!name || !phone || !school || !grade) return show('학생 기본 정보를 모두 입력해주세요.');
+  if (!member) return show('재원 여부를 선택해주세요.');
+  if (!target) return show('희망 고교를 선택해주세요.');
+  if (!session) return show('참석 회차를 선택해주세요.');
+  if (!agreed) return show('개인정보 수집 및 이용에 동의해주세요.');
+
+  const btn = document.querySelector('#view-seminar .submit-btn');
+  btn.textContent = '제출 중...'; btn.disabled = true;
+
+  fetch(SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: '설명회', name, phone, school, grade, member, target, session, memo })
+  }).then(() => {
+    document.querySelectorAll('#view-seminar .section-card').forEach(el => el.style.display = 'none');
+    errEl.style.display = 'none';
+    btn.style.display = 'none';
+    document.getElementById('s_successMsg').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }).catch(() => {
+    show('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+    btn.textContent = '설명회 신청하기'; btn.disabled = false;
   });
 }
 </script>
