@@ -145,7 +145,11 @@ select {
 
 .notice { background: #ebf0fb; border-left: 3px solid #1a3a7c; border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12.5px; color: #334466; line-height: 1.7; margin-bottom: 14px; }
 .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-@media (max-width: 360px) { .time-grid { grid-template-columns: repeat(2, 1fr); } }
+.target-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (max-width: 360px) { .time-grid, .target-grid { grid-template-columns: repeat(2, 1fr); } }
+.tg-opt { display: none; }
+.tg-lbl { display: block; padding: 10px 6px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 13px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
+.tg-opt:checked + .tg-lbl { border-color: #c8a84b; background: #fdf9ee; color: #0d1a3a; font-weight: 700; }
 .t-opt { display: none; }
 .t-lbl { display: block; padding: 10px 6px; border: 1.5px solid #d8dcea; border-radius: 9px; text-align: center; font-size: 13px; cursor: pointer; color: #556; background: #fafbfd; transition: all 0.15s; }
 .t-opt:checked + .t-lbl { border-color: #0d1a3a; background: #e4eaf8; color: #0d1a3a; font-weight: 700; }
@@ -197,17 +201,6 @@ select {
 
   <div class="landing-body">
     <p class="landing-section-title">📋 신청 가능한 프로그램</p>
-
-    <div class="program-card" onclick="showView('view-form')">
-      <div class="program-card-left">
-        <h3>2026 여름방학 특강</h3>
-        <p>2026. 8. 3 ~ 8. 14</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="program-card-badge">신청중</span>
-        <span class="program-arrow">›</span>
-      </div>
-    </div>
 
     <div class="program-card" onclick="showView('view-seminar')">
       <div class="program-card-left">
@@ -500,16 +493,15 @@ select {
           </div>
         </div>
         <div class="field">
-          <label class="field-label">희망 고교 <span class="req">*</span></label>
-          <select id="s_target">
-            <option value="">선택해주세요</option>
-            <option>미정</option>
-            <option>과학고</option>
-            <option>영재고</option>
-            <option>전국자사고</option>
-            <option>광역자사고</option>
-            <option>외고/국제고</option>
-          </select>
+          <label class="field-label">희망 고교 <span class="req">*</span> <span style="font-weight:400;color:#8899bb;font-size:12px">(복수 선택 가능)</span></label>
+          <div class="target-grid">
+            <input type="checkbox" class="tg-opt" id="tg1" value="미정"><label class="tg-lbl" for="tg1">미정</label>
+            <input type="checkbox" class="tg-opt" id="tg2" value="과학고"><label class="tg-lbl" for="tg2">과학고</label>
+            <input type="checkbox" class="tg-opt" id="tg3" value="영재고"><label class="tg-lbl" for="tg3">영재고</label>
+            <input type="checkbox" class="tg-opt" id="tg4" value="전국자사고"><label class="tg-lbl" for="tg4">전국자사고</label>
+            <input type="checkbox" class="tg-opt" id="tg5" value="광역자사고"><label class="tg-lbl" for="tg5">광역자사고</label>
+            <input type="checkbox" class="tg-opt" id="tg6" value="외고/국제고"><label class="tg-lbl" for="tg6">외고/국제고</label>
+          </div>
         </div>
       </div>
     </div>
@@ -567,8 +559,8 @@ select {
 
     <div class="contact-bar">
       <div class="phone">📞 02-898-7905</div>
-      <ul class="addr-list">
-        <li><span class="addr-tag">장소</span><span>실력의힘 건물 5층</span></li>
+      <ul class="addr-list" style="justify-content:center;align-items:center">
+        <li style="justify-content:center"><span class="addr-tag">장소</span><span>실력의힘 건물 5층</span></li>
       </ul>
     </div>
 
@@ -724,7 +716,7 @@ function submitSeminar() {
   const grade  = document.getElementById('s_grade').value;
   const memberEl = document.querySelector('input[name="s_member"]:checked');
   const member = memberEl ? memberEl.value : '';
-  const target = document.getElementById('s_target').value;
+  const target = [...document.querySelectorAll('.tg-opt:checked')].map(e => e.value).join(', ');
   const sessionEl = document.querySelector('input[name="s_session"]:checked');
   const session = sessionEl ? sessionEl.value : '';
   const memo   = document.getElementById('s_memo').value.trim();
